@@ -1,0 +1,87 @@
+<div class="container">
+
+  <!-- <div class="jumbotron text-center">
+       <h1>Welcome</h1>
+       <p class="lead">
+       <b>leipzig</b>: list of initiatives working with refugees
+       </p>
+       </div> -->
+
+
+  <div class="page-title row">
+    <div class="hidden-xs page-icon col-sm-2 col-md-2">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+    </div>
+    <div class="col-sm-10 col-md-10">
+      <h2>
+        <b>leipzig</b>: list of initiatives working with refugees
+      </h2>
+
+      <ul ng-if="main.posts.length > 0" class="fade nav nav-pills">
+        <li role="presentation" ng-hide="main.searchActive" ng-class="{active: main.activeCategory == ''}">
+          <a ng-click="main.activeCategory = ''" href="#">
+            Alle
+            <span class="badge">
+              {{main.posts.length}}
+            </span>
+          </a>
+        </li>
+        <li role="presentation" ng-hide="main.searchActive" ng-repeat="(key, value) in main.tags" ng-class="{active: key == main.activeCategory}">
+          <a ng-click="main.activeCategory = key;" href="#">{{key == " " ? "sonstige" : key}}
+            <span class="badge">
+              {{value.length}}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" ng-hide="main.searchActive" ng-click="main.searchActive = true">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li ng-show="main.searchActive" role="presentation" >
+          <div class="col-md-5 input-group">
+            <input
+              type="text"
+              ng-model="main.searchTerm"
+              class="form-control"
+              placeholder="suchen"
+              aria-describedby="basic-addon2">
+            <a class="input-group-addon" id="basic-addon2">
+              <span ng-click="main.searchTerm = ''; main.searchActive = false" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              {{count}}
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div ng-show="!main.posts.length" class="row">
+    <div class="col-sm-6 col-md-12">
+      <div class="progress">
+        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          <span class="sr-only">Loading</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div ng-if="main.posts.length" class="row">
+    <div class="col-sm-6 col-md-12">
+      <div ng-repeat="post in main.getActiveSelectionPosts()  | filter: main.searchTerm | orderBy:'name'" class="fade panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title"><b>{{ post.name }}</b></h3>
+        </div>
+        <div class="panel-body">
+          {{ post.description }}
+        </div>
+        <div class="panel-footer">
+          <a ng-href="{{post.website}}" target="_blank" ng-if="post.website">
+            {{post.website}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
