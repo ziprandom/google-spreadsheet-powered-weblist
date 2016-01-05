@@ -26,7 +26,7 @@ export class PostRepo {
   loadUrl(url: string): angular.IPromise<any[]> {
     return this.blockspringApi.getSpreadsheet(url).then( (data: any) => {
       return [data.map((data: any) => {
-	data.tags = (data.category || ' ').split(',');
+	data.tags = (data.category || ' ').split(/\s*,\s*/);
 	$.each(data.tags, (index: number, tag: string) => {
 	  this.addPostForTag(tag, data);
 	});
