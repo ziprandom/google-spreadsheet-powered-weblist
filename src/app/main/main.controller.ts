@@ -5,7 +5,7 @@ export class MainController {
   public posts: IPost[];
   public tags: IPostDictionary;
   public activeCategory: string = '';
-  public searchActive: bool = false;
+  public searchActive: boolean = false;
   public searchTerm: string = '';
   /* @ngInject */
   constructor ($timeout: angular.ITimeoutService, public postRepo: PostRepo) {
