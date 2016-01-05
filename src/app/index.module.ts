@@ -21,5 +21,5 @@ module ghlist {
     .run(runBlock)
     .service('blockspringApi', BlockspringApi)
     .service('postRepo', PostRepo)
-    .controller('MainController', MainController)
+    .controller('MainController', MainController);
 }
