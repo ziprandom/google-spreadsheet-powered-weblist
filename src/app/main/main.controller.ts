@@ -1,5 +1,5 @@
 import { PostRepo, IPost, IPostDictionary } from '../components/postRepo/postRepo.service';
-import { config } from '../app.config';
+import { Config } from '../app.config';
 
 export class MainController {
   public classAnimation: string;
@@ -10,7 +10,8 @@ export class MainController {
   public searchTerm: string = '';
   /* @ngInject */
   constructor ($timeout: angular.ITimeoutService, public postRepo: PostRepo) {
-    postRepo.loadUrl(config.googleSpreadsheetUrl).then((data: any[]) => {
+    this.config = Config;
+    postRepo.loadUrl(Config.googleSpreadsheetUrl).then((data: any[]) => {
       this.posts = data[0];
       this.tags = data[1];
     });
